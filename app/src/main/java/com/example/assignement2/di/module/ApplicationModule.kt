@@ -5,6 +5,7 @@ import com.example.assignement2.MyApplication
 import com.example.assignement2.data.local.FileStorageService
 import com.example.assignement2.data.remote.HttpClient
 import com.example.assignement2.di.ApplicationContext
+import com.example.assignement2.di.ApplicationScope
 import com.example.assignement2.di.DatabaseName
 import com.example.assignement2.di.DatabaseVersion
 import com.example.assignement2.di.NetworkApiKey
@@ -21,7 +22,7 @@ class ApplicationModule(private val application: MyApplication) {
         return application
     }
 
-    @Singleton
+    @ApplicationScope
     @Provides
     fun provideHttpClient(): HttpClient {
         return HttpClient()
@@ -33,14 +34,14 @@ class ApplicationModule(private val application: MyApplication) {
 
     @DatabaseVersion
     @Provides
-    fun provideDatabaseVersion(): Int = 1
+    fun provideDatabaseVersion(): Int =  1
 
     @NetworkApiKey
     @Provides
     fun provideApiKey(): String = "SOME_API_KEY"
 
 
-    @Singleton
+    @ApplicationScope
     @Provides
     fun provideFileStorageService(): FileStorageService {
         return FileStorageService()
